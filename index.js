@@ -2,54 +2,51 @@ const todoList = () => {
   all = []
   const add = (todoItem) => {
     all.push(todoItem)
-  }              
+  }             
   const markAsComplete = (index) => {
     all[index].completed = true
   }
+  let today = new Date().toISOString().split("T")[0];
 
   const overdue = () => {
-    // Write the date check condition here and return the array of overdue items accordingly.
-    overdue.all
-    overdue.add({title: "Submit assignment",dueDate:2022-07-21,completed: false})
+    return all.filter((todo) => {
+      return todo.dueDate < today;
+    })
   }
 
   const dueToday = () => {
-    // Write the date check condition here and return the array of todo items that are due today accordingly.
-    // FILL YOUR CODE HERE
-    dueToday.all
-    dueToday.add({title: "Pay rent"})
-    dueToday.all
-    dueToday.add({title: "Service vehicle"})
-    // ..
-    // ..
+    return all.filter((todo) => {
+      return todo.dueDate === today;
+    })
   }
 
   const dueLater = () => {
-    // Write the date check condition here and return the array of todo items that are due later accordingly.
-    // FILL YOUR CODE HERE
-    // ..
-    dueLater.all
-    dueLater.add({title: "File taxes",dueDate:2022-07-23,completed: false})
-    dueLater.all
-    dueLater.add({title: " Pay electric bill",dueDate:2022-07-23,completed: false})
-    // ..
-    // ..
+    return all.filter((todo) => {
+      return todo.dueDate > today;
+    })
   }
 
   const toDisplayableList = (list) => {
-    // Format the To-Do list here, and return the output string as per the format given above.
-    // FILL YOUR CODE HERE
-    // ..
-    all[list].completed = true
-    console.log(all)
-    // ..
-    // ..
-    // return OUTPUT_STRING
+    return list
+      .map((todo) => {
+        display_status = todo.completed ? "[x]" : "[ ]";
+        display_date = todo.dueDate == today ? "" : todo.dueDate;
+
+        return `${display_status} ${todo.title} ${display_date}`;
+      })
+      .join("\n");
   }
 
-  return { all, add, markAsComplete, overdue, dueToday, dueLater, toDisplayableList };
+  return {
+    all,
+    add,
+    markAsComplete,
+    overdue,
+    dueToday,
+    dueLater,
+    toDisplayableList,
+  }
 }
-
 // ####################################### #
 // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
 // ####################################### #
